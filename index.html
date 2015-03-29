@@ -1,3 +1,6 @@
+<?php
+header('Access-Control-Allow-Origin: *');
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -61,7 +64,8 @@
 
           $.ajax({
             type : "GET",
-            url : queryStr
+            url : queryStr,
+            format : "jsonp"
           }).done(function(data, textStatus, jqXHR){
             //console.log(data.objects[0]);
             for(var prop in fipData){
@@ -94,7 +98,8 @@
 
                 $.ajax({
                   type : "GET",
-                  url : queryStr
+                  url : queryStr,
+                  format : "jsonp"
                 }).done(function(data, textStatus, jqXHR){
                   for(var prop in fipData){
                     if(data.objects[0].metadata.KEY.indexOf(prop) > -1) {
