@@ -42,14 +42,12 @@
           for(var prop in fipData){
             if(data.objects[0].metadata.KEY.indexOf(prop) > -1) {
              $("#locText").html("You are in " + data.objects[0].name + ". See how the median salary for " + fipData[prop].COUNTY + " residents compares to state, county and local public employees.");
-             $("#over").html(fipData[prop].OVERALL);
-                   console.log(fipData[prop].OVERALL);
-
-             $("#state").html(fipData[prop].STATEWIDE);
-             $("#fire").html(fipData[prop].FIRE);
-             $("#police").html(fipData[prop].POLICE);             
-             $("#public").html(fipData[prop].PUBLIC_EMPLOYEES);             
-             $("#teach").html(fipData[prop].TEACHERS);             
+             $("#over").html("$" + fipData[prop].OVERALL.toLocaleString());
+             $("#state").html("$" + fipData[prop].STATEWIDE.toLocaleString());
+             $("#fire").html("$" + fipData[prop].FIRE.toLocaleString());
+             $("#police").html("$" + fipData[prop].POLICE.toLocaleString());             
+             $("#public").html("$" + fipData[prop].PUBLIC_EMPLOYEES.toLocaleString());             
+             $("#teach").html("$" + fipData[prop].TEACHERS.toLocaleString());             
 
              //console.log(fipData[prop]);
             }
@@ -105,13 +103,13 @@
                 for(var prop in fipData){
                   if(data.objects[0].metadata.KEY.indexOf(prop) > -1) {
                     $("#locText").html("You are in " + data.objects[0].name + ". See how the median salary for " + fipData[prop].COUNTY + " residents compares to state, county and local public employees.");
-                   $("#over").text(fipData[prop].OVERALL);
-                   console.log(fipData[prop].OVERALL);
-                   $("#state").text(fipData[prop].STATEWIDE);
-                   $("#fire").text(fipData[prop].FIRE);
-                   $("#police").text(fipData[prop].POLICE);             
-                   $("#public").text(fipData[prop].PUBLIC_EMPLOYEES);             
-                   $("#teach").text(fipData[prop].TEACHERS);
+                   $("#over").text("$" + fipData[prop].OVERALL.toLocaleString());
+                   console.log("$" + fipData[prop].OVERALL.toLocaleString());
+                   $("#state").text("$" + fipData[prop].STATEWIDE.toLocaleString());
+                   $("#fire").text("$" + fipData[prop].FIRE.toLocaleString());
+                   $("#police").text("$" + fipData[prop].POLICE.toLocaleString());             
+                   $("#public").text("$" + fipData[prop].PUBLIC_EMPLOYEES.toLocaleString());             
+                   $("#teach").text("$" + fipData[prop].TEACHERS.toLocaleString());
                   }
                 }
               });
