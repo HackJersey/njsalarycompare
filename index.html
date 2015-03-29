@@ -64,7 +64,8 @@ header('Access-Control-Allow-Origin: *');
 
           $.ajax({
             type : "GET",
-            url : queryStr
+            url : queryStr,
+            format : "jsonp"
           }).done(function(data, textStatus, jqXHR){
             //console.log(data.objects[0]);
             for(var prop in fipData){
@@ -97,9 +98,8 @@ header('Access-Control-Allow-Origin: *');
 
                 $.ajax({
                   type : "GET",
-                  url : queryStr
-                  format : "jsonp",
-                  json_callback : 
+                  url : queryStr,
+                  format : "jsonp"
                 }).done(function(data, textStatus, jqXHR){
                   for(var prop in fipData){
                     if(data.objects[0].metadata.KEY.indexOf(prop) > -1) {
