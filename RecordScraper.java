@@ -9,13 +9,17 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 
 public class RecordScraper {
-	static ArrayList LastName = new ArrayList();
-	static ArrayList FirstName = new ArrayList();
-	static ArrayList MiddleInitial = new ArrayList();
 	static ArrayList LocationName = new ArrayList();
-	static ArrayList PensionName = new ArrayList();
+	static ArrayList PensionGroup = new ArrayList();
+	static ArrayList PensionFund = new ArrayList();
 	static ArrayList Salary = new ArrayList();
 	static ArrayList UniqueID = new ArrayList();
+	static String[] COUNTY = {"ATLANTIC COUNTY", "BERGEN COUNTY", "BURLINGTON COUNTY", "CAMBDEN COUNTY",
+		"CAPE MAY COUNTY", "CUMBERLAND COUNTY", "ESSEX COUNTY", "GLOUCESTER COUNTY",
+		"HUDSON COUNTY", "HUNDERTON COUNTY", "MERCER COUNTY", "MIDDLESEX COUNTY",
+		"MONMOUTH COUNTY", "MORRIS COUNTY", "OCEAN COUNTY", "PASSAIC COUNTY", "SALEM COUNTY",
+		"SOMERSET COUNTY", "SUSSEX COUNTY", "UNION COUNTY", "WARREN COUNTY", "Statewide"};
+	static double[] COUNTY_OVERALL, COUNTY_STATEWIDE, COUNTY_PUBLIC_EMPLOYEES, COUNTY_TEACHERS, COUNTY_POLICE,COUNTY_FIRE;
 	static int i = 0;
 
 	public static void main(String[] args) throws IOException{
@@ -26,35 +30,111 @@ public class RecordScraper {
 
 		FileWriter outfile = new FileWriter("output.txt", false);
 		PrintWriter output = new PrintWriter(outfile);
+
+		int x=0, z=0;
+		double Get_Salary;
+		double[] Total, Total_Avg, Total_Fire, Total_Police, Total_Teacher, Total_Public;
+		String Location = null, Pension_Group = null, Pension_Fund;
 		
-		//  6 data points to output to JSON
-		// Last, First, M., Pension, Location, Salary
-		int x=0;
-		output.println("[");
-		while(x<i)
+		while (z < i) {
+			Location = (String) LocationName.get(z);
+			Pension_Group = (String) PensionGroup.get(z);
+			Pension_Fund = (String) PensionFund.get(z);
+			Get_Salary = 90;
+			
+			if(Location.equals(COUNTY[0])){
+				if(Pension_Group.equals("FIREFIGHTER")){
+					
+				}
+				if(Pension_Group.equals("POLICE OFFICER")){
+					
+				}
+				if(Pension_Fund.equals("TEACHERS' PENSION AND ANNUITY FUND")){
+					
+				}
+				if(Pension_Fund.equals("PUBLIC EMPLOYEES' RETIREMENT SYSTEM")){
+					
+				}
+			}
+			if(Location.equals(COUNTY[1])){
+				
+			}
+			if(Location.equals(COUNTY[2])){
+				
+			}
+			if(Location.equals(COUNTY[3])){
+				
+			}
+			if(Location.equals(COUNTY[4])){
+				
+			}
+			if(Location.equals(COUNTY[5])){
+				
+			}
+			if(Location.equals(COUNTY[6])){
+				
+			}
+			if(Location.equals(COUNTY[7])){
+				
+			}
+			if(Location.equals(COUNTY[8])){
+				
+			}
+			if(Location.equals(COUNTY[9])){
+				
+			}
+			if(Location.equals(COUNTY[10])){
+				
+			}
+			if(Location.equals(COUNTY[11])){
+				
+			}
+			if(Location.equals(COUNTY[12])){
+				
+			}
+			if(Location.equals(COUNTY[13])){
+				
+			}
+			if(Location.equals(COUNTY[14])){
+				
+			}
+			if(Location.equals(COUNTY[15])){
+				
+			}
+			if(Location.equals(COUNTY[16])){
+				
+			}
+			if(Location.equals(COUNTY[17])){
+				
+			}
+			if(Location.equals(COUNTY[18])){
+				
+			}
+			if(Location.equals(COUNTY[19])){
+				
+			}
+			if(Location.equals(COUNTY[20])){
+				
+			}
+			if(Location.equals(COUNTY[21])){
+				
+			}
+		}
+		
+		//Creates JSON file to be implemented with other code
+		output.print("[");
+		while(x<22)
 		{
-			output.print("{"); // start of a new record - outer loop
-		
-			output.println(x);
-			// write record fields - inner loop
-			output.print("MEMBER_LAST_NAME:");
-			output.print(LastName.get(x));
-			output.println(",");
-			output.print("MEMBER_FIRST_NAME:");
-			output.print(FirstName.get(x));
-			output.println(",");
-			output.print("MEMBER_MI:");
-			output.print(MiddleInitial.get(x));
-			output.println(",");
-			output.print("PENSION_FUND_NAME:");
-			output.print(PensionName.get(x));
-			output.println(",");
-			output.print("LOCATION_NAME:");
-			output.print(LocationName.get(x));
-			output.println(",");
-			output.print("CURRENT_EMPLOYER_SALARY_AMT:");
-			output.println(Salary.get(x));
-			output.println("},"); 
+			output.print("{ 'FIPS': '001',");
+			output.println("'" + COUNTY[x] +"': ");
+			output.print("{ 'Overall': ");
+			output.print(COUNTY_OVERALL[x] + ", 'Statewide': ");
+			output.print(COUNTY_STATEWIDE[x] + ", 'Public Employees': ");
+			output.print(COUNTY_PUBLIC_EMPLOYEES[x] + ", 'Teachers': ");
+			output.print(COUNTY_TEACHERS[x] + ", 'Police': ");
+			output.print(COUNTY_POLICE[x] + ", 'Fire': ");
+			output.println(COUNTY_FIRE[x] + "}");
+			output.print("},");
 			x+=1;
 		}
 		output.print("]");
@@ -66,51 +146,50 @@ public class RecordScraper {
 			BufferedReader br = null;
 			String line = "";
 			String cvsSplitBy = ",";
-			String Data0, Data1;
+			String Data0 = null, Data1 = null;
 			int Row = 0, Count = 0;
-			boolean Repeat;
 
 			br = new BufferedReader(new FileReader(csvFile));
-
-			line = br.readLine();
-			String[] Column0 = line.split(cvsSplitBy);
-
-			UniqueID.add(Column0[1] + Column0[2] + Column0[6]);
+			
+			//Reads data from excell file
 			while ((line = br.readLine()) != null) {
-				// use comma as separator
-				i+=1;
-				Count = 0;
-				Row +=1;
-				
-				Repeat=false;
-				
 				String[] Column = line.split(cvsSplitBy);
-				UniqueID.add(Column[1] + Column[2]);
-				Data0 = (String) UniqueID.get(Row);
-				//Searching for matches in data
-				while(Row>Count){
-					Data1=(String) UniqueID.get(Count);
-					if(Data0==Data1){
-						Repeat = true;
-						System.out.println(Count);
-						Count=Row+1;
-					}
-					System.out.println(Data0 + " : " + Data1);
-
-					Count+=1;
-				}
+				//Creates a unique ID for each array
+				UniqueID.add(Column[1] + Column[2] + Column[18]);
 				
-				//adding row to data if it is not repeated
-				if(Repeat == false)
-				{
-				LastName.add(Column[1]);
-				FirstName.add(Column[2]);
-				MiddleInitial.add(Column[3]);
+				//Stores data from excell file
 				LocationName.add(Column[8]);
-				PensionName.add(Column[10]);
-				Salary.add(Column[18]);
-				}
+				PensionFund.add(Column[10]);
+				PensionGroup.add(Column[12]);
+				Salary.add(Column[19]+Column[20]);
+				i+=1;
 			}
+			Row = 0;
+			Count = 0;
+		
+			while(Row<i){
+				Salary.get(Row);
+			//Sort through array to check for duplicates
+/*			while (Row < i) {
+				Row += 1;
+				Count = Row + 1;
+				Data0 = (String) UniqueID.get(Row);
+
+				// Searching for matches in data
+				while (Count < UniqueID.size()) {
+					Data1 = (String) UniqueID.get(Count);
+					if (Data0.equals(Data1)) {
+						//Removes duplicates
+						System.out.println(Data0);
+						UniqueID.remove(Count);
+						LocationName.remove(Count);
+						PensionGroup.remove(Count);
+						PensionFund.remove(Count);
+						Salary.remove(Count);
+					}
+					Count += 1;
+				}
+			}*/
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
