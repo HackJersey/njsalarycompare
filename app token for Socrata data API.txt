@@ -1,0 +1,8 @@
+ App Token zGgG1XOOPEbZWWADiSXSZCuLT
+Secret Token dUaEaXpTOfxrtc0_9x0KSM3mHtcoc6kVJL1Z
+
+Good to use, to avoid throttling measures by dataset owner (like being limited to 1000 records, bandwidth, and possibly quota and security restrictions).
+
+Use with the following parameter in API calls:
+
+$$app_token=zGgG1XOOPEbZWWADiSXSZCuLT
