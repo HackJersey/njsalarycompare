@@ -8,8 +8,8 @@
       }
 
       function success(position) {
-        var lat = position.coords.latitude;
-        var lng = position.coords.longitude;
+        var lat = position.coords.latitude || 40.00;
+        var lng = position.coords.longitude || -74.65;
 
         var queryStr = "http://boundary.hackjersey.com/1.0/boundary/?contains=" + lat +"," + lng + "&sets=new-jersey-municipalities";
 
@@ -103,13 +103,13 @@
                 for(var prop in fipData){
                   if(data.objects[0].metadata.KEY.indexOf(prop) > -1) {
                     $("#locText").html("You are in " + data.objects[0].name + ". See how the median salary for " + fipData[prop].COUNTY + " residents compares to state, county and local public employees.");
-                   $("#over").text("$" + fipData[prop].OVERALL.toLocaleString());
-                   console.log("$" + fipData[prop].OVERALL.toLocaleString());
-                   $("#state").text("$" + fipData[prop].STATEWIDE.toLocaleString());
-                   $("#fire").text("$" + fipData[prop].FIRE.toLocaleString());
-                   $("#police").text("$" + fipData[prop].POLICE.toLocaleString());             
-                   $("#public").text("$" + fipData[prop].PUBLIC_EMPLOYEES.toLocaleString());             
-                   $("#teach").text("$" + fipData[prop].TEACHERS.toLocaleString());
+                    $("#over").text("$" + fipData[prop].OVERALL.toLocaleString());
+                    //console.log("$" + fipData[prop].OVERALL.toLocaleString());
+                    $("#state").text("$" + fipData[prop].STATEWIDE.toLocaleString());
+                    $("#fire").text("$" + fipData[prop].FIRE.toLocaleString());
+                    $("#police").text("$" + fipData[prop].POLICE.toLocaleString());             
+                    $("#public").text("$" + fipData[prop].PUBLIC_EMPLOYEES.toLocaleString());             
+                    $("#teach").text("$" + fipData[prop].TEACHERS.toLocaleString());
                   }
                 }
               });
